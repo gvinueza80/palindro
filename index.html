@@ -117,7 +117,7 @@
         <div class="label">Normalized</div>
         <div class="value" id="normalized"></div>
       </div>
-      <div class="word-count">Words: <span id="word-count">0</span></div>
+      <div class="word-count">Words: <span id="word-count">0</span> &nbsp;·&nbsp; Characters: <span id="char-count">0</span></div>
     </div>
   </div>
 
@@ -127,6 +127,7 @@
     const verdictEl    = document.getElementById('verdict');
     const normalizedEl = document.getElementById('normalized');
     const wordCountEl  = document.getElementById('word-count');
+    const charCountEl  = document.getElementById('char-count');
 
     function normalize(s) {
       return s.replace(/[^a-z0-9]/gi, '').toLowerCase();
@@ -152,6 +153,7 @@
       verdictEl.className    = 'verdict ' + (isPalindrome ? 'yes' : 'no');
       normalizedEl.textContent = norm;
       wordCountEl.textContent  = countWords(raw);
+      charCountEl.textContent  = raw.length;
     }
 
     inputEl.addEventListener('input', check);
