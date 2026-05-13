@@ -93,6 +93,17 @@
       color: #333;
       word-break: break-all;
     }
+
+    .word-count {
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .word-count span {
+      font-weight: 700;
+      color: #333;
+    }
   </style>
 </head>
 <body>
@@ -106,17 +117,23 @@
         <div class="label">Normalized</div>
         <div class="value" id="normalized"></div>
       </div>
+      <div class="word-count">Words: <span id="word-count">0</span></div>
     </div>
   </div>
 
   <script>
-    const inputEl     = document.getElementById('input');
-    const resultEl    = document.getElementById('result');
-    const verdictEl   = document.getElementById('verdict');
+    const inputEl      = document.getElementById('input');
+    const resultEl     = document.getElementById('result');
+    const verdictEl    = document.getElementById('verdict');
     const normalizedEl = document.getElementById('normalized');
+    const wordCountEl  = document.getElementById('word-count');
 
     function normalize(s) {
       return s.replace(/[^a-z0-9]/gi, '').toLowerCase();
+    }
+
+    function countWords(s) {
+      return s.trim() === '' ? 0 : s.trim().split(/\s+/).length;
     }
 
     function check() {
@@ -134,6 +151,7 @@
       verdictEl.textContent  = isPalindrome ? 'Palindrome' : 'Not a palindrome';
       verdictEl.className    = 'verdict ' + (isPalindrome ? 'yes' : 'no');
       normalizedEl.textContent = norm;
+      wordCountEl.textContent  = countWords(raw);
     }
 
     inputEl.addEventListener('input', check);
